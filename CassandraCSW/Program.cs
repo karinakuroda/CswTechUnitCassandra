@@ -1,12 +1,11 @@
-﻿using Cassandra;
-using System;
-using System.Linq;
+﻿using System;
 
 namespace CassandraCSW
 {
     class Program
     {
         public static Repository repository { get; set; }
+
         static void Main(string[] args)
         {
             repository = new Repository();
@@ -53,8 +52,7 @@ namespace CassandraCSW
             Console.WriteLine("D = Remover um status");
             Console.WriteLine("S = Sair");
             Console.WriteLine("--------------------------");
-            Console.WriteLine();
-            
+            Console.WriteLine();   
         }
 
         public static void CreateOrderStatus()

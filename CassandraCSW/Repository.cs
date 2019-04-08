@@ -27,6 +27,7 @@ namespace CassandraCSW
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 return false;
             }
           
@@ -58,6 +59,7 @@ namespace CassandraCSW
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 return false;
 
             }
@@ -79,6 +81,7 @@ namespace CassandraCSW
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 return false;
             }
             return false;
