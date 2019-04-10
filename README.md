@@ -1,4 +1,4 @@
-# Csw Tech Unit Cassandra
+ï»¿# Csw Tech Unit Cassandra
 
 ## Using Cassandra + Docker
 
@@ -9,7 +9,7 @@ docker run --name some-cassandra -p 9042:9042 -p 9160:9160 -d cassandra:latest
 ```
 
 ### Run CQL SH
->  CQL?—?Cassandra Query Language
+>  CQLâ€Šâ€”â€ŠCassandra Query Language
 
 ```bash
 docker exec -it some-cassandra cqlsh
@@ -51,7 +51,7 @@ docker exec -it some-cassandra /bin/bash
 
 ***
 ###  What is Apache Cassandra?
-> Apache Cassandra™, a top level Apache project born at Facebook and built on Amazon’s Dynamo and Google’s BigTable, is a distributed database for managing large amounts of structured data across many commodity servers, while providing highly available service and no single point of failure. 
+> Apache Cassandraâ„¢, a top level Apache project born at Facebook and built on Amazonâ€™s Dynamo and Googleâ€™s BigTable, is a distributed database for managing large amounts of structured data across many commodity servers, while providing highly available service and no single point of failure. 
 
 ### How to set up entity relations?
 
