@@ -12,10 +12,5 @@ namespace CassandraCSW
             this.Id = id;
             this.Status = status;
         }
-
-        public void ParseEntity()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

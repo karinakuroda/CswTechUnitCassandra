@@ -8,5 +8,13 @@ namespace CassandraCSW
 {
     public interface IRepository
     {
+        bool CreateOrderStatus(string name);
+
+        List<OrderStatus> ListOrderStatus();
+
+        bool UpdateOrderStatus(string oldName, string newName);
+
+        bool DeleteOrderStatus(string status);
+
     }
 }

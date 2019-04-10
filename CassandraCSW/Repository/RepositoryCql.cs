@@ -2,16 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CassandraCSW
+namespace CassandraCSW.Repository
 {
-    public class Repository
+    public class RepositoryCql : IRepository
     {
         private static ISession _session { get; set; }
 
-        public Repository()
+        public RepositoryCql()
         {
             var cluster = Cluster.Builder()
                      .AddContactPoints("127.0.0.1")
@@ -30,7 +28,6 @@ namespace CassandraCSW
                 Console.WriteLine(ex);
                 return false;
             }
-          
             return true;
         }
 
@@ -40,7 +37,7 @@ namespace CassandraCSW
             var orders = ParseToModel(rows);
             return orders;
         }
-        
+
         public bool UpdateOrderStatus(string oldName, string newName)
         {
             try

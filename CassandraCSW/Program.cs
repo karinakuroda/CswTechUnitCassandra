@@ -1,14 +1,15 @@
-﻿using System;
+﻿using CassandraCSW.Repository;
+using System;
 
 namespace CassandraCSW
 {
     class Program
     {
-        public static Repository repository { get; set; }
+        public static IRepository repository { get; set; }
 
         static void Main(string[] args)
         {
-            repository = new Repository();
+            repository = new RepositoryCql();
             var showOptions = true;
             
             while (showOptions)
