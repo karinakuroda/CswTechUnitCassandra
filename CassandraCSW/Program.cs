@@ -40,7 +40,7 @@ namespace CassandraCSW
             }
         }
 
-        public static void ShowOptions()
+        private static void ShowOptions()
         {
             Console.WriteLine();
             Console.WriteLine("--------------------------");
@@ -55,7 +55,7 @@ namespace CassandraCSW
             Console.WriteLine();   
         }
 
-        public static void CreateOrderStatus()
+        private static void CreateOrderStatus()
         {
             Console.WriteLine("Digite o nome do novo status:");
             var name = Console.ReadLine();
@@ -66,16 +66,16 @@ namespace CassandraCSW
                 Console.WriteLine("Não foi possível criar o novo status");
         }
 
-        public static void ListOrderStatus()
+        private static void ListOrderStatus()
         {
             var rs = repository.ListOrderStatus();
             foreach (var row in rs)
             {
-                Console.WriteLine($"Id:{row.GetValue<Guid>("id")}| Name:{row.GetValue<string>("status")}");
+                Console.WriteLine($"Id:{row.Id}| Status:{row.Status}");
             }
         }
 
-        public static void UpdateOrderStatus()
+        private static void UpdateOrderStatus()
         {
             Console.WriteLine("Digite o nome do status que deseja alterar:");
             var oldStatus = Console.ReadLine();
@@ -89,7 +89,7 @@ namespace CassandraCSW
                 Console.WriteLine("Não foi possível atualizar o status");
         }
 
-        public static void DeleteOrderStatus()
+        private static void DeleteOrderStatus()
         {
             Console.WriteLine("Digite o nome do status que deseja remover:");
             var status = Console.ReadLine();

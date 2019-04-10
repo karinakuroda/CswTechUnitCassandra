@@ -34,26 +34,22 @@ namespace CassandraCSW
             return true;
         }
 
-        public RowSet ListOrderStatus()
+        public List<OrderStatus> ListOrderStatus()
         {
-            return _session.Execute("SELECT * FROM order_status");
+            var rows = _session.Execute($"SELECT * FROM order_status");
+            var orders = ParseToModel(rows);
+            return orders;
         }
-
-        private RowSet GetOrderStatusByName(string name)
-        {
-            var selectCommand = _session.Execute($"SELECT * FROM order_status WHERE status = '{name}' ALLOW FILTERING");
-            return selectCommand;
-        }
-
+        
         public bool UpdateOrderStatus(string oldName, string newName)
         {
             try
             {
                 var oldOrder = GetOrderStatusByName(oldName);
-                var result = oldOrder.GetRows().FirstOrDefault();
+                var result = oldOrder.FirstOrDefault();
                 if (result != null)
                 {
-                    var updateCommand = _session.Execute($"UPDATE cswkeyspace.order_status SET status = '{newName}' WHERE id = {result.GetValue<Guid>("id")}");
+                    var updateCommand = _session.Execute($"UPDATE cswkeyspace.order_status SET status = '{newName}' WHERE id = {result.Id}");
                     return true;
                 }
             }
@@ -72,10 +68,10 @@ namespace CassandraCSW
             try
             {
                 var oldOrder = GetOrderStatusByName(status);
-                var result = oldOrder.GetRows().FirstOrDefault();
+                var result = oldOrder.FirstOrDefault();
                 if (result != null)
                 {
-                    var deleteCommand = _session.Execute($"DELETE FROM cswkeyspace.order_status WHERE id = {result.GetValue<Guid>("id")}");
+                    var deleteCommand = _session.Execute($"DELETE FROM cswkeyspace.order_status WHERE id = {result.Id}");
                     return true;
                 }
             }
@@ -88,5 +84,20 @@ namespace CassandraCSW
 
         }
 
+        #region Private
+
+        private List<OrderStatus> GetOrderStatusByName(string name)
+        {
+            var rows = _session.Execute($"SELECT * FROM order_status WHERE status = '{name}' ALLOW FILTERING");
+            var orders = ParseToModel(rows);
+            return orders;
+        }
+
+        private List<OrderStatus> ParseToModel(RowSet rows)
+        {
+            return rows.GetRows().Select(row => new OrderStatus(row.GetValue<Guid>("id"), row.GetValue<string>("status"))).ToList();
+        }
+
+        #endregion
     }
 }
