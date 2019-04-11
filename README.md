@@ -32,23 +32,22 @@ INSERT INTO cswkeyspace.order_status (id, status) VALUES (now(), 'Delivered');
 ```
 
 
-### Others
+### Other docker commands
 
 ```bash
 docker inspect some-cassandra
 docker exec -it some-cassandra nodetool status
+docker exec -it some-cassandra /bin/bash
 ```
+> The Cassandra configuration files can be found in the conf directory of tarballs. For packages, the configuration files will be located in /etc/cassandra.
 
+### Other cqlsh commands
 ```sql
 USE cswKeyspace;
 DROP TABLE cswkeyspace.order_status;
+DESCRIBE Keyspaces;
 ```
 
-```bash
-docker exec -it some-cassandra /bin/bash
-```
-
-> The Cassandra configuration files can be found in the conf directory of tarballs. For packages, the configuration files will be located in /etc/cassandra.
 
 ### Dependencies
 * DataStax C# Driver for Apache Cassandra
@@ -94,13 +93,23 @@ to clients.
 >The replication factor essentially allows you to decide how much you want to pay
 in performance to gain more consistency.
 
-When replication factor = 1 and you have 3 node cluster:
-Only 1 copy of the data being store to the keyspace, each node owns aprox. 33% of the data for the keyspace
+When 
+```bash 
+'replication factor' : 1
+```
+and you have 3 node cluster:
+
+>Only 1 copy of the data being store to the keyspace, each node owns aprox. 33% of the data for the keyspace
 
 ![](./img/owns_replicationfactor1.png "Replication")
 
-When replication factor = 3 and you have 3 node cluster
-Each node owns 100% of the data for the keyspace
+When 
+```bash 
+'replication factor' : 3
+```
+and you have 3 node cluster:
+
+>Each node owns 100% of the data for the keyspace
 
 ![](./img/owns_replicationfactor3.png "Replication")
 
